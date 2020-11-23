@@ -117,14 +117,17 @@ export const createInitialData = async () => {
     existingUser = await newUser.save();
   }
 
-  dummySessions.forEach(async (s) => {
-    const newSession = new Session({
-      tutor: existingUser.id,
-      date: s.date,
-      time: s.time,
-      location: s.location,
-      subjects: s.subjects,
+  const numberOfSessionsStored = await Session.countDocuments();
+  if (numberOfSessionsStored < dummySessions.length) {
+    dummySessions.forEach(async (s) => {
+      const newSession = new Session({
+        tutor: existingUser.id,
+        date: s.date,
+        time: s.time,
+        location: s.location,
+        subjects: s.subjects,
+      });
+      await newSession.save();
     });
-    await newSession.save();
-  });
+  }
 };
