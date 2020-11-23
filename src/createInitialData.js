@@ -1,5 +1,5 @@
 import { hash } from "bcryptjs";
-import { User } from "./models";
+import { User, Session } from "./models";
 
 const newUserData = {
   firstName: "John",
@@ -11,8 +11,102 @@ const newUserData = {
   role: "ROLE_TUTOR",
 };
 
+const dummySessions = [
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.2" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Science", level: "Lv.1" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.1" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.1" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.1" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.2" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.1" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.1" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.1" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+  {
+    date: "Tue-Nov 10",
+    time: "4:00PM - 6:00PM",
+    subjects: [
+      { name: "Math", level: "Lv.1" },
+      { name: "Math", level: "Lv.1" },
+    ],
+    location: "Bloor Collegiate Institute",
+  },
+];
+
 export const createInitialData = async () => {
-  const existingUser = await User.findOne({ email: newUserData.email });
+  let existingUser = await User.findOne({ email: newUserData.email });
+
   if (!existingUser) {
     const hashedPassword = await hash(newUserData.password, 12);
 
@@ -20,6 +114,17 @@ export const createInitialData = async () => {
       ...newUserData,
       password: hashedPassword,
     });
-    newUser.save();
+    existingUser = await newUser.save();
   }
+
+  dummySessions.forEach(async (s) => {
+    const newSession = new Session({
+      tutor: existingUser.id,
+      date: s.date,
+      time: s.time,
+      location: s.location,
+      subjects: s.subjects,
+    });
+    await newSession.save();
+  });
 };
