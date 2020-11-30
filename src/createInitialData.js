@@ -150,17 +150,17 @@ export const createInitialData = async () => {
   }
 
   // Adding students
-  let students = [];
+  let existingStudents = [];
   students.forEach(async (s) => {
     const existingStudent = await User.findOne({ email: s.email });
-    if (existingStudent) students.push(existingStudent);
+    if (existingStudent) existingStudents.push(existingStudent);
     else {
       const hashedPassword = await hash(s.password, 12);
       const newStudent = new User({
         ...s,
         password: hashedPassword,
       });
-      students.push(await newStudent.save());
+      existingStudents.push(await newStudent.save());
     }
   });
 
@@ -174,7 +174,7 @@ export const createInitialData = async () => {
         location: s.location,
         subjects: s.subjects,
         notes: s.notes,
-        attendance: students.map((s) => {
+        attendance: existingStudents.map((s) => {
           return { student: s.id, isPresent: Math.random() < 0.5 };
         }),
       });
