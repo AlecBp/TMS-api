@@ -1,3 +1,15 @@
+# Setup
+## Make sure that there is a '.env' file in the root of the folder with the following values 
+```
+ACCESS_TOKEN_SECRET=random_string
+ACCESS_TOKEN_DURATION=300s
+REFRESH_TOKEN_SECRET=random_string
+REFRESH_TOKEN_DURATION=1d
+BOOTSTRAP_INITIAL_USER=true
+MONGO_URI=uri_to_your_mongodb
+
+```
+# API
 ## Get all sessions
 
 ```
