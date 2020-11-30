@@ -160,9 +160,11 @@ export const createInitialData = async () => {
 
   // Adding students
   let existingStudents = [];
+
   students.forEach(async (s) => {
     const existingStudent = await User.findOne({ email: s.email });
     if (existingStudent) existingStudents.push(existingStudent);
+    
     else {
       const hashedPassword = await hash(s.password, 12);
       const newStudent = new User({

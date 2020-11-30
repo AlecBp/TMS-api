@@ -16,7 +16,7 @@ const resolvers = {
       if (!context.auth.isAuth) throw new ForbiddenError();
 
       // Objects exist
-      const se = await Session.findById(id).populate("tutor").populate("attendance.student").exec();
+      const se = await Session.findById(id).populate("tutor").populate("attendance.student");
       if (!se) throw new ObjectDoesNotExistError();
 
       // Is the current logged user (Tutor) the person assigned to that session
