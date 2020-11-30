@@ -14,7 +14,7 @@ import { createInitialData } from "./createInitialData";
 
 const app = express();
 
-app.use(helmet());
+// app.use(helmet());
 
 app.use(
   cors()
@@ -26,7 +26,8 @@ app.use(
 
 app.use(cookie_parser());
 
-app.get("/", (req, res) => res.send("Server working!"));
+// app.get("/", (req, res) => res.send("Server working!"));
+
 app.post("/refresh_token", handleRefreshToken);
 
 const db = process.env.MONGO_URI;
