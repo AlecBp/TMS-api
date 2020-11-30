@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 import subjectSchema from "./Subject";
+import attendanceSchema from "./Attendance";
 
 const sessionSchema = new Schema(
   {
@@ -9,6 +10,8 @@ const sessionSchema = new Schema(
     date: { type: Schema.Types.String, required: true },
     time: { type: Schema.Types.String, required: true },
     location: { type: Schema.Types.String, required: true },
+    notes: { type: Schema.Types.String },
+    attendance: [attendanceSchema],
     subjects: [subjectSchema],
   },
   { timestamps: true }
