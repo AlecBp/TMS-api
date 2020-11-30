@@ -11,6 +11,36 @@ const newUserData = {
   role: "ROLE_TUTOR",
 };
 
+const students = [
+  {
+    firstName: "Alec",
+    lastName: "Pagliarussi",
+    username: "alecP",
+    password: "password",
+    dateOfBirth: "1997-01-01",
+    email: "alec@gmail.com",
+    role: "ROLE_STUDENT",
+  },
+  {
+    firstName: "Suho",
+    lastName: "Kang",
+    username: "suhoK",
+    password: "password",
+    dateOfBirth: "1990-01-01",
+    email: "suho@gmail.com",
+    role: "ROLE_STUDENT",
+  },
+  {
+    firstName: "Rafael",
+    lastName: "Afonso",
+    username: "rafonso",
+    password: "password",
+    dateOfBirth: "1990-01-01",
+    email: "rafael@gmail.com",
+    role: "ROLE_STUDENT",
+  },
+];
+
 const dummySessions = [
   {
     date: "Tue-Nov 10",
@@ -20,6 +50,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.2" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -105,6 +136,7 @@ const dummySessions = [
 ];
 
 export const createInitialData = async () => {
+  // Adding tutor
   let existingUser = await User.findOne({ email: newUserData.email });
 
   if (!existingUser) {
@@ -117,6 +149,21 @@ export const createInitialData = async () => {
     existingUser = await newUser.save();
   }
 
+  // Adding students
+  let students = [];
+  students.forEach(async (s) => {
+    const existingStudent = await User.findOne({ email: s.email });
+    if (existingStudent) students.push(existingStudent);
+    else {
+      const hashedPassword = await hash(s.password, 12);
+      const newStudent = new User({
+        ...s,
+        password: hashedPassword,
+      });
+      students.push(await newStudent.save());
+    }
+  });
+
   const numberOfSessionsStored = await Session.countDocuments();
   if (numberOfSessionsStored < dummySessions.length) {
     dummySessions.forEach(async (s) => {
@@ -126,6 +173,10 @@ export const createInitialData = async () => {
         time: s.time,
         location: s.location,
         subjects: s.subjects,
+        notes: s.notes,
+        attendance: students.map((s) => {
+          return { student: s.id, isPresent: Math.random() < 0.5 };
+        }),
       });
       await newSession.save();
     });
