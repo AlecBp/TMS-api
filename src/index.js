@@ -26,6 +26,7 @@ app.use(
 
 app.use(cookie_parser());
 
+app.get("/", (req, res) => res.send("Server working!"));
 app.post("/refresh_token", handleRefreshToken);
 
 const db = process.env.MONGO_URI;
