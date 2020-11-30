@@ -4,9 +4,25 @@ import { Session, User } from "./../../models";
 
 const resolvers = {
   Query: {
-    sessions: () => Session.find({}).populate("tutor").populate("attendance.student"),
-    session: (_, { id }) => {
-      return Session.findById(id).populate("tutor").populate("attendance.student");
+    sessions: (_, args, context) => {
+      // Auth
+      if (!context.auth.isAuth) throw new ForbiddenError();
+
+      // Get sessions where the logged in user is tutor of
+      return Session.find({ tutor: context.auth.userId }).populate("tutor").populate("attendance.student");
+    },
+    session: async (_, { id }, context) => {
+      // Auth
+      if (!context.auth.isAuth) throw new ForbiddenError();
+
+      // Objects exist
+      const se = await Session.findById(id).populate("tutor").populate("attendance.student").exec();
+      if (!se) throw new ObjectDoesNotExistError();
+
+      // Is the current logged user (Tutor) the person assigned to that session
+      if (se.tutor.id !== context.auth.userId) throw new ForbiddenError();
+
+      return se;
     },
   },
   Mutation: {

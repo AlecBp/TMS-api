@@ -24,7 +24,7 @@ const typeDefs = gql`
 
   extend type Query {
     sessions: [Session]
-    session(id: ID!): User
+    session(id: ID!): Session
   }
 
   extend type Mutation {
