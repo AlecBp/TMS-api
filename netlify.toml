@@ -1,2 +1,2 @@
 [build]
-  command="CI= yarn build"
+  command="CI= yarn start"

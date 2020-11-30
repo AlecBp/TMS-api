@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import cookie_parser from "cookie-parser";
+import helmet from "helmet";
 
 import { typeDefs, resolvers } from "./graphql";
 
@@ -13,6 +14,8 @@ import { createInitialData } from "./createInitialData";
 
 const app = express();
 
+app.use(helmet());
+
 app.use(
   cors()
   //   {
@@ -20,7 +23,9 @@ app.use(
   //   credentials: true,
   // }
 );
+
 app.use(cookie_parser());
+
 app.post("/refresh_token", handleRefreshToken);
 
 const db = process.env.MONGO_URI;
