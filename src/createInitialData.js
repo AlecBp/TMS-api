@@ -60,6 +60,7 @@ const dummySessions = [
       { name: "Science", level: "Lv.1" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -69,6 +70,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.1" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -78,6 +80,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.1" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -87,6 +90,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.1" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -96,6 +100,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.2" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -105,6 +110,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.1" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -114,6 +120,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.1" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -123,6 +130,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.1" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
   {
     date: "Tue-Nov 10",
@@ -132,6 +140,7 @@ const dummySessions = [
       { name: "Math", level: "Lv.1" },
     ],
     location: "Bloor Collegiate Institute",
+    notes: "These are some session notes",
   },
 ];
 
