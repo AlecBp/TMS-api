@@ -1,6 +1,7 @@
 import { User } from "./../../models";
 import { hash, compare } from "bcryptjs";
 import { getFieldsForUpdate } from "./../utils";
+import {subjectToUser} from "./service";
 
 const resolvers = {
   Query: {
@@ -21,6 +22,14 @@ const resolvers = {
       // Implement findoneandupdate
       // const newUser = new User({ firstName, lastName, email, username, password: hashedPassword, dateOfBirth });
       return newUser.findById(id);
+    },
+
+    addSubjectsToUser: async ({subject, user}) => {
+      return subjectToUser({subject, user}, "add");
+    },
+
+    removeSubjectsFromUser: async ({subject, user}) => {
+      return subjectToUser({subject, user}, "remove");
     },
   },
 };

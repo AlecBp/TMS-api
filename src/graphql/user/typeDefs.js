@@ -11,6 +11,7 @@ const typeDefs = gql`
     active: Boolean
     role: String
     bio: String!
+    subjects: [Subject]
   }
 
   extend type Query {
@@ -41,6 +42,10 @@ const typeDefs = gql`
       role: String,
       bio: String
     ): User
+
+    addSubjectToUser(subject: ID!, user: ID!): User
+
+    removeSubjectFromUser(subject: ID!, user: ID!): User
   }
 `;
 
