@@ -10,6 +10,7 @@ const typeDefs = gql`
     dateOfBirth: String
     active: Boolean
     role: String
+    bio: String!
   }
 
   extend type Query {
@@ -26,6 +27,7 @@ const typeDefs = gql`
       password: String!
       dateOfBirth: String
       role: String
+      bio: String!
     ): User
 
     editUser(
@@ -36,7 +38,8 @@ const typeDefs = gql`
       username: String
       password: String
       dateOfBirth: String
-      role: String
+      role: String,
+      bio: String
     ): User
   }
 `;
