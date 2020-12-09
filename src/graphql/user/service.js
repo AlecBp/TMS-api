@@ -6,20 +6,20 @@ import { ObjectDoesNotExistError } from "../errors/ObjectDoesNotExistError";
 const subjectToUser = async ({subject, user}, action) => {
   let update = {};
 
-  if(action === "remove") {
-    update = { $pull: { subjects: subject } };
-  } else {
-    update = { $push: { subjects: subject } }
-  }
-  // update = { [`${action == "remove" ? "$pull" : "$push"}`]: {subjects: subject} }
+  // if(action === "remove") {
+  //   update = { $pull: { subjects: subject } };
+  // } else {
+  //   update = { $push: { subjects: subject } }
+  // }
+  // // update = { [`${action == "remove" ? "$pull" : "$push"}`]: {subjects: subject} }
 
-  const [_subject, _user] = await Promise.all([
-    User.findById(user).select("_id").lean().exec(),
-    Subject.findById(user).select("_id").lean().exec(),
-  ]);
+  // const [_subject, _user] = await Promise.all([
+  //   User.findById(user).select("_id").lean().exec(),
+  //   Subject.findById(user).select("_id").lean().exec(),
+  // ]);
 
-  if(!_subject) throw new ObjectDoesNotExistError();
-  if(!_user) throw new ObjectDoesNotExistError();
+  // if(!_subject) throw new ObjectDoesNotExistError();
+  // if(!_user) throw new ObjectDoesNotExistError();
 
 
   return User.findOneAndUpdate(user, update, {
