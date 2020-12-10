@@ -53,10 +53,10 @@ const startServer = async () => {
   app.listen({ port: 4000 }, () => {
     console.log(`🚀  Server ready`);
   });
+
+  if (process.env.BOOTSTRAP_INITIAL_USER === "true") {
+    await createInitialData();
+  }
 };
 
 startServer();
-
-if (process.env.BOOTSTRAP_INITIAL_USER === "true") {
-  createInitialData();
-}
