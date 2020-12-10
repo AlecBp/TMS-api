@@ -14,7 +14,7 @@ import { createInitialData } from "./createInitialData";
 
 const app = express();
 
-app.use(helmet());
+// app.use(helmet());
 
 app.use(
   cors()
