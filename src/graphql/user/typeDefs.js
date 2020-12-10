@@ -29,6 +29,7 @@ const typeDefs = gql`
       dateOfBirth: String
       role: String
       bio: String!
+      subjects: [InputSubject]
     ): User
 
     editUser(
@@ -39,8 +40,9 @@ const typeDefs = gql`
       username: String
       password: String
       dateOfBirth: String
-      role: String,
+      role: String
       bio: String
+      subjects: [InputSubject]
     ): User
 
     addSubjectToUser(subject: ID!, user: ID!): User

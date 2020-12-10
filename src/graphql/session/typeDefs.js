@@ -1,12 +1,7 @@
 import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
-  type Subject {
-    name: String!
-    level: String!
-  }
-
-  type Attendance {
+   type Attendance {
     isPresent: Boolean
     student: User
   }

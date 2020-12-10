@@ -1,6 +1,7 @@
 import user from "./user";
 import session from "./session";
 import auth from "./auth";
+import subject from "./subject";
 import { gql } from "apollo-server-express";
 
 const resolvers = [user.resolvers, auth.resolvers, session.resolvers];
@@ -14,6 +15,7 @@ const typeDefs = gql`
     _empty: String
   }
 
+  ${subject.typeDefs}
   ${user.typeDefs}
   ${session.typeDefs}
   ${auth.typeDefs}
